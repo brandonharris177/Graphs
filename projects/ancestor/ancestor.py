@@ -38,7 +38,7 @@ class Graph:
         else:
             return -1
         
-    def earliest(self, starting_node):
+    def get_paths(self, starting_node):
         q = Queue()
         q.enqueue([starting_node])
         paths = []
@@ -74,7 +74,7 @@ def earliest_ancestor(ancestors, starting_node):
     if parents.get_parents(starting_node) == -1:
         return -1
 
-    paths = parents.earliest(starting_node) 
+    paths = parents.get_paths(starting_node) 
 
     longest_path = paths[0]
 
