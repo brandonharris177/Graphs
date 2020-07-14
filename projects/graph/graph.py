@@ -85,11 +85,13 @@ class Graph:
         else:
             visited = set()
 
-        if starting_vertex not in visited:
-            visited.add(starting_vertex)
-            print(starting_vertex)
+        current_node = starting_vertex
 
-            for neighbor in self.get_neighbors(starting_vertex):
+        if current_node not in visited:
+            visited.add(current_node)
+            print(current_node)
+
+            for neighbor in self.get_neighbors(current_node):
                 self.dft_recursive(neighbor,visited)
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -143,7 +145,7 @@ class Graph:
                     next_path = [*path, neighbor]
                     s.push(next_path)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, path = None, visited = None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -151,7 +153,30 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        if path:
+            path = path
+        else:
+            path = [starting_vertex]
+
+        if visited:
+            visited = visited
+        else:
+            visited = set()
+
+        current_node = path[-1]
+
+        if current_node == destination_vertex:
+            return path
+            
+        if current_node not in visited:
+            visited.add(current_node)
+            neighbors = self.get_neighbors(current_node)
+            for neighbor in neighbors:
+                next_path = [*path, neighbor]
+                destination_path = self.dfs_recursive(current_node, destination_vertex, next_path, visited)
+
+                if destination_path:
+                    return destination_path
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
