@@ -116,7 +116,7 @@ class Graph:
                 visited.add(current_node)
                 neighbors = self.get_neighbors(current_node)
                 for neighbor in neighbors:
-                    next_path = [*path, neighbor]
+                    next_path = path + [neighbor]
                     q.enqueue(next_path)
 
                     
@@ -142,7 +142,7 @@ class Graph:
                 visited.add(current_node)
                 neighbors = self.get_neighbors(current_node)
                 for neighbor in neighbors:
-                    next_path = [*path, neighbor]
+                    next_path = path + [neighbor]
                     s.push(next_path)
 
     def dfs_recursive(self, starting_vertex, destination_vertex, path = None, visited = None):
@@ -172,7 +172,7 @@ class Graph:
             visited.add(current_node)
             neighbors = self.get_neighbors(current_node)
             for neighbor in neighbors:
-                next_path = [*path, neighbor]
+                next_path = path + [neighbor]
                 destination_path = self.dfs_recursive(current_node, destination_vertex, next_path, visited)
 
                 if destination_path:
