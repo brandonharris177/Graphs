@@ -83,8 +83,11 @@ class SocialGraph:
         half_total_friendships = total_friendships/2
         random_friendships = friendships[:int(half_total_friendships)]
 
+
         for friendship in random_friendships:
             self.add_friendship(friendship[0], friendship[1])
+
+        print(count)
 
 
     def get_all_social_paths(self, user_id):
@@ -118,7 +121,7 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
+    sg.populate_graph(100, 10)
     print(sg.friendships)
     connections = sg.get_all_social_paths(1)
     print(connections)
