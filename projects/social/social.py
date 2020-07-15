@@ -103,6 +103,10 @@ class SocialGraph:
         q = Queue()
         q.enqueue([user_id])
 
+        if self.friendships[user_id] == {}:
+            visited[user_id] = set(user_id)
+            return visited
+
         while q.size() > 0:
             path = q.dequeue()
             current_node = path[-1]
