@@ -49,8 +49,7 @@ class Graph:
 
             if self.get_parents(current_node) == -1:
                 paths.append(path)
-
-            if self.get_parents(current_node) != -1:
+            else:
                 parents = self.get_parents(current_node)
                 for parent in parents:
                     next_path = path + [parent]
