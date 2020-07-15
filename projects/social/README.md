@@ -53,7 +53,7 @@ Note that in this sample, Users 3, 4 and 9 are not in User 1's extended social n
 2. If you create 1000 users with an average of 5 random friends each, what percentage of other users will be in a particular user's extended social network? What is the average degree of separation between a user and those in his/her extended network?
 
 Each user has .05 percent of total in friend group
-1 .5^4 are the chances that a user has no friends (0.06%)
+1 .5^5 are the chances that a user has no friends (0.03%)
 2 31 nodes
 Average users in an extended network 969 (99.4%)
 Average degree of seperation will be 4 (should include 625 of 969 possible connections)
