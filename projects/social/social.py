@@ -87,8 +87,6 @@ class SocialGraph:
         for friendship in random_friendships:
             self.add_friendship(friendship[0], friendship[1])
 
-        print(count)
-
 
     def get_all_social_paths(self, user_id):
         """
