@@ -56,7 +56,7 @@ Each user has .05 percent of total in friend group
 1 .5^5 are the chances that a user has no friends (0.03%)
 2 31 nodes
 Average users in an extended network 969 (99.4%)
-Average degree of seperation will be 4 (should include 625 of 969 possible connections)
+Average degree of seperation will be 4 (5^4 = 625) (should include 625 of 969 possible connections)
 
 ## 4. Stretch Goal
 
