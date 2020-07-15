@@ -43,8 +43,6 @@ class Graph:
         q.enqueue([starting_node])
         paths = []
 
-        visited = set()
-
         while q.size() > 0:
             path = q.dequeue()
             current_node = path[-1]
@@ -52,12 +50,11 @@ class Graph:
             if self.get_parents(current_node) == -1:
                 paths.append(path)
 
-            if current_node not in visited:
-                if self.get_parents(current_node) != -1:
-                    parents = self.get_parents(current_node)
-                    for parent in parents:
-                        next_path = path + [parent]
-                        q.enqueue(next_path)
+            if self.get_parents(current_node) != -1:
+                parents = self.get_parents(current_node)
+                for parent in parents:
+                    next_path = path + [parent]
+                    q.enqueue(next_path)
 
         return paths
 
@@ -86,8 +83,6 @@ def earliest_ancestor(ancestors, starting_node):
             longest_path = path
 
     return(longest_path[-1])
-
-
 
     
 earliest_ancestor([(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)], 6)
