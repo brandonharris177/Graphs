@@ -33,8 +33,9 @@ visited = set()
 travel_direction = ('n', 's')
 last_room = 'Not in graph'
 
-
-while len(visited) < len(room_graph):
+while len(visited) < len(room_graph)-1:
+    print(len(visited))
+    print(len(room_graph))
     current_room = player.current_room.id
     exits = player.current_room.get_exits()
     if current_room not in visited:
@@ -81,19 +82,9 @@ while len(visited) < len(room_graph):
     player.travel(travel_direction[0])
     traversal_path.append(travel_direction[0])
 
-    print(traversal_graph)
-    print(traversal_path)
-
-
-    # while s.size() > 0:
-    #     current_room = s.pop()
-    #     if current_room not in visited:
-    #         print(current_node)
-    #         visited.add(current_node)
-    #         neighbors = self.get_neighbors(current_node)
-    #         for neighbor in neighbors:
-    #             s.push(neighbor)
-
+    # print(traversal_graph)
+    # print(traversal_path)
+    # print(visited)
 
 # TRAVERSAL TEST
 visited_rooms = set()
