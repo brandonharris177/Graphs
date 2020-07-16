@@ -34,10 +34,17 @@ visited = set()
 travel_direction = ('w', 'e')
 last_room = 'Not in graph'
 
+travel_direction_dictionary = {
+    'n': [('n', 's'), ('s', 'n')],
+    'e': [('e', 'w'), ('w', 'e')],
+    's': [('s', 'n'), ('n', 's')],
+    'w': [('w', 'e'), ('e', 'w')]
+}
+
 while len(visited) < len(room_graph)-1:
     current_room = player.current_room.id
     exits = player.current_room.get_exits()
-    
+
     if current_room not in visited:
         traversal_graph[current_room] = {}
         for each_exit in exits:
@@ -55,14 +62,7 @@ while len(visited) < len(room_graph)-1:
 
     while untravelded_directions == []:
         last_step = retrace.pop()
-        if last_step == 's':
-            travel_direction = ('n', 's')
-        elif last_step == 'w':
-            travel_direction = ('e', 'w')
-        elif last_step == 'n':
-            travel_direction = ('s', 'n')
-        elif last_step == 'e':
-            travel_direction = ('w', 'e')
+        travel_direction = travel_direction_dictionary[last_step][1]
         player.travel(travel_direction[0])
         traversal_path.append(travel_direction[0])
         current_room = player.current_room.id
@@ -72,14 +72,7 @@ while len(visited) < len(room_graph)-1:
 
     while travel_direction[0] not in untravelded_directions:
         next_travel = untravelded_directions[0] 
-        if next_travel == 'n':
-            travel_direction = ('n', 's')
-        elif next_travel == 'e':
-            travel_direction = ('e', 'w')
-        elif next_travel == 's':
-            travel_direction = ('s', 'n')
-        elif next_travel == 'w':
-            travel_direction = ('w', 'e')
+        travel_direction = travel_direction_dictionary[next_travel][0]
 
     last_room = current_room
     player.travel(travel_direction[0])
