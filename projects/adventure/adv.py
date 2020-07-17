@@ -55,12 +55,12 @@ while len(visited) < len(room_graph)-1:
         traversal_graph[current_room][travel_direction[1]] = last_room
         traversal_graph[last_room][travel_direction[0]] = current_room
 
-    untravelded_directions = []
+    untraveld_directions = []
     for key, value in traversal_graph[current_room].items():
         if value == '?':
-            untravelded_directions.append(key)
+            untraveld_directions.append(key)
 
-    while untravelded_directions == []:
+    while untraveld_directions == []:
         last_step = retrace.pop()
         travel_direction = travel_direction_dictionary[last_step][1]
         player.travel(travel_direction[0])
@@ -68,10 +68,10 @@ while len(visited) < len(room_graph)-1:
         current_room = player.current_room.id
         for key, value in traversal_graph[current_room].items():
             if value == '?':
-                untravelded_directions.append(key)
+                untraveld_directions.append(key)
 
-    while travel_direction[0] not in untravelded_directions:
-        next_travel = untravelded_directions[0] 
+    while travel_direction[0] not in untraveld_directions:
+        next_travel = untraveld_directions[0] 
         travel_direction = travel_direction_dictionary[next_travel][0]
 
     last_room = current_room
