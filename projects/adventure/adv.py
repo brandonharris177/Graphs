@@ -42,6 +42,13 @@ compass = {
 
 travel_direction = compass['n']
 
+def untraveled(current_room):
+    untraveled_list = []
+    for key, value in map[current_room].items():
+        if value == '?':
+            untraveled_list.append(key)
+    return untraveled_list
+
 while len(visited) < len(room_graph)-1:
     current_room = player.current_room.id
     exits = player.current_room.get_exits()
@@ -56,23 +63,18 @@ while len(visited) < len(room_graph)-1:
         map[current_room][travel_direction[1]] = last_room
         map[last_room][travel_direction[0]] = current_room
 
-    untraveld_directions = []
-    for key, value in map[current_room].items():
-        if value == '?':
-            untraveld_directions.append(key)
+    untraveled_directions = untraveled(current_room)
 
-    while untraveld_directions == []:
+    while untraveled_directions == []:
         last_step = bread_crumbs.pop()
         travel_direction = compass[last_step]
         player.travel(travel_direction[0])
         traversal_path.append(travel_direction[0])
         current_room = player.current_room.id
-        for key, value in map[current_room].items():
-            if value == '?':
-                untraveld_directions.append(key)
+        untraveled_directions = untraveled(current_room)
 
-    while travel_direction[0] not in untraveld_directions:
-        next_travel = untraveld_directions[0] 
+    while travel_direction[0] not in untraveled_directions:
+        next_travel = untraveled_directions[0] 
         travel_direction = compass[next_travel]
 
     last_room = current_room
