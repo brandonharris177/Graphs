@@ -66,16 +66,14 @@ while len(visited) < len(room_graph)-1:
     untraveled_directions = untraveled(current_room)
 
     while untraveled_directions == []:
-        last_step = bread_crumbs.pop()
-        travel_direction = compass[last_step]
+        travel_direction = compass[bread_crumbs.pop()]
         player.travel(travel_direction[0])
         traversal_path.append(travel_direction[0])
         current_room = player.current_room.id
         untraveled_directions = untraveled(current_room)
 
     while travel_direction[0] not in untraveled_directions:
-        next_travel = untraveled_directions[0] 
-        travel_direction = compass[next_travel]
+        travel_direction = compass[untraveled_directions[0]]
 
     last_room = current_room
     player.travel(travel_direction[0])
