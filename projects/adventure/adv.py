@@ -28,56 +28,57 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 traversal_path = []
-retrace = []
-traversal_graph = {}
+bread_crumbs = []
+map = {}
 visited = set()
-travel_direction = ('w', 'e')
-last_room = 'Not in graph'
+last_room = ""
 
-travel_direction_dictionary = {
-    'n': [('n', 's'), ('s', 'n')],
-    'e': [('e', 'w'), ('w', 'e')],
-    's': [('s', 'n'), ('n', 's')],
-    'w': [('w', 'e'), ('e', 'w')]
+compass = {
+    'n': ('n', 's'),
+    'e': ('e', 'w'),
+    's': ('s', 'n'),
+    'w': ('w', 'e')
 }
+
+travel_direction = compass['n']
 
 while len(visited) < len(room_graph)-1:
     current_room = player.current_room.id
     exits = player.current_room.get_exits()
 
     if current_room not in visited:
-        traversal_graph[current_room] = {}
+        map[current_room] = {}
         for each_exit in exits:
-            traversal_graph[current_room][each_exit] = '?'
+            map[current_room][each_exit] = '?'
             visited.add(current_room)
 
-    if last_room in traversal_graph:
-        traversal_graph[current_room][travel_direction[1]] = last_room
-        traversal_graph[last_room][travel_direction[0]] = current_room
+    if last_room in map:
+        map[current_room][travel_direction[1]] = last_room
+        map[last_room][travel_direction[0]] = current_room
 
     untraveld_directions = []
-    for key, value in traversal_graph[current_room].items():
+    for key, value in map[current_room].items():
         if value == '?':
             untraveld_directions.append(key)
 
     while untraveld_directions == []:
-        last_step = retrace.pop()
-        travel_direction = travel_direction_dictionary[last_step][1]
+        last_step = bread_crumbs.pop()
+        travel_direction = compass[last_step]
         player.travel(travel_direction[0])
         traversal_path.append(travel_direction[0])
         current_room = player.current_room.id
-        for key, value in traversal_graph[current_room].items():
+        for key, value in map[current_room].items():
             if value == '?':
                 untraveld_directions.append(key)
 
     while travel_direction[0] not in untraveld_directions:
         next_travel = untraveld_directions[0] 
-        travel_direction = travel_direction_dictionary[next_travel][0]
+        travel_direction = compass[next_travel]
 
     last_room = current_room
     player.travel(travel_direction[0])
     traversal_path.append(travel_direction[0])
-    retrace.append(travel_direction[0])
+    bread_crumbs.append(travel_direction[1])
 
 
 # TRAVERSAL TEST
